@@ -5,6 +5,10 @@ import 'flutter_webview_plugin/flutter_webview_plugin_main.dart';
 
 class HomePage extends StatelessWidget {
 
+  static TextEditingController unameController = TextEditingController(
+    text: "file:///android_asset/html/native.html"
+  ) ;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +18,13 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
+            TextField(
+              controller: unameController,
+              decoration: InputDecoration(
+                hintText: "输入加载的网址",
+              ),
+            ),
+
             RightView(
               title: "flutter webview plugin",
               rightClick: () {
@@ -50,8 +61,7 @@ class RightView extends StatelessWidget {
   Widget build(BuildContext context) {
     var containView;
     if (title != Null) {
-      containView = new Container(
-        alignment: Alignment.center,
+      containView = new RaisedButton(
         padding: EdgeInsets.all(10.0),
         child: GestureDetector(
           child: Text(

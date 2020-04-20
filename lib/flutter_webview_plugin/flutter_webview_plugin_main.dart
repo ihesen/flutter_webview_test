@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:flutter_webview_test/home_page.dart';
 
 class FlutterWebviewPluginMain extends StatefulWidget {
   @override
@@ -24,9 +25,8 @@ final Set<JavascriptChannel> jsChannels = [
 
 
 class FlutterWebviewPluginMainState extends State {
-  var loadUrl = "http://www.baidu.com";
-  //android 加载本地html，本地h5，需要放在在assets目录下
-  var localUrl = "file:///android_asset/html/native.html";
+
+  var loadUrl = HomePage.unameController.text;
 
   // On urlChanged stream
   StreamSubscription<String> _onUrlChanged;
@@ -53,15 +53,9 @@ class FlutterWebviewPluginMainState extends State {
   }
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new WebviewScaffold(
-        url: localUrl,
+        url: loadUrl,
         //定义js和flutter通信channel
         javascriptChannels: jsChannels,
         appBar: new AppBar(
